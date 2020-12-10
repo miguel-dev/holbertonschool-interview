@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 def canUnlockAll(boxes):
-    if not boxes:
-        return False
     keys = []
     unlockAll = True
     for i in range(0, 1):
@@ -11,11 +9,10 @@ def canUnlockAll(boxes):
                 for key in boxes[number]:
                     if key not in keys:
                         keys.append(key)
+            elif (number not in keys):
+                unlockAll = False
             else:
-                if number in keys:
-                    for key in boxes[number]:
-                        if key not in keys:
-                            keys.append(key)
-                else:
-                    unlockAll = False
+                for key in boxes[number]:
+                    if key not in keys:
+                        keys.append(key)
     return unlockAll
