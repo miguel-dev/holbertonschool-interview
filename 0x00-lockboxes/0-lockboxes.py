@@ -2,7 +2,7 @@
 def canUnlockAll(boxes):
     keys = []
     unlockAll = True
-    for i in range(0, 1):
+    for i in range(0, 2):
         unlockAll = True
         for number in range(0, len(boxes)):
             if (number == 0):
