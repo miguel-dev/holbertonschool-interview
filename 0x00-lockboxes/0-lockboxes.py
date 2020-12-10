@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 def canUnlockAll(boxes):
+    if not boxes:
+        return False
     keys = []
     unlockAll = True
     for i in range(0, 1):
