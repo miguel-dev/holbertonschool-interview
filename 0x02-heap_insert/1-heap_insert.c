@@ -19,7 +19,7 @@ heap_t *heap_insert(heap_t **root, int value)
 		return (NULL);
 	}
 
-	new_node->parent = *root;
+	new_node->parent = NULL;
 	new_node->left = NULL;
 	new_node->right = NULL;
 	new_node->n = value;
