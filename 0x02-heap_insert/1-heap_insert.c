@@ -11,8 +11,6 @@
  */
 heap_t *heap_insert2(heap_t *root, heap_t *node)
 {
-	heap_t *new_node;
-
 	if (root->left == NULL)
 	{
 		root->left = node;
@@ -25,17 +23,17 @@ heap_t *heap_insert2(heap_t *root, heap_t *node)
 	}
 	else
 	{
-		new_node = heap_insert2(root->left, node);
-		if (new_node)
+		node = heap_insert2(root->left, node);
+		if (node)
 		{
-			return (new_node);
+			return (node);
 
 		}
 
-		new_node = heap_insert2(root->right, node);
-		if (new_node)
+		node = heap_insert2(root->right, node);
+		if (node)
 		{
-			return (new_node);
+			return (node);
 		}
 	}
 	return (node);
