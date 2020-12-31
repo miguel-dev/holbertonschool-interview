@@ -5,33 +5,40 @@
  * heap_insert2 - Inserts a value into a Max Binary Heap.
  *
  * @root: Address to root node of Heap.
- * @new_node: Node to be inserted.
+ * @node: Node to be inserted.
  *
  * Return: Pointer to the inserted node, or NULL if it fails.
  */
-heap_t *heap_insert2(heap_t *root, heap_t *new_node)
+heap_t *heap_insert2(heap_t *root, heap_t *node)
 {
+	heap_t *new_node;
+
 	if (root->left == NULL)
 	{
-		root->left = new_node;
-		new_node->parent = root;
+		root->left = node;
+		node->parent = root;
 	}
-	else if (new_node->right == NULL)
+	else if (root->right == NULL)
 	{
-		root->right = new_node;
-		new_node->parent = root;
+		root->right = node;
+		node->parent = root;
 	}
 	else
 	{
-		new_node = heap_insert2(root->left, new_node);
+		new_node = heap_insert2(root->left, node);
+		if (new_node)
+		{
+			return (new_node);
+
+		}
+
+		new_node = heap_insert2(root->right, node);
 		if (new_node)
 		{
 			return (new_node);
 		}
-
-		new_node = heap_insert2(root->right, new_node);
 	}
-	return (new_node);
+	return (node);
 }
 
 
