@@ -1,44 +1,73 @@
 #include "binary_trees.h"
 #include <stdlib.h>
+#include <stdbool.h>
 
 /**
- * heap_insert2 - Inserts a value into a Max Binary Heap.
+ * depth - Calculates the depth of the tree.
+ * 
+ * @root: Root of tree.
+ *
+ * Return: Depth of tree.
+ */
+int calculate_depth(heap_t *root)
+{
+	int depth = 1;
+	heap_t *iterator;
+
+	iterator = root;
+	while (iterator->left)
+	{
+		iterator = iterator->left;
+		depth++;
+	}
+	return (depth);
+}
+
+/**
+ * swap - If there is a Max heap violation it swaps the nodes.
+ *
+ * @root: Addess of root node.
+ * @new_node: node to start checkin for Max heap violations.
+ *
+ *
+ */
+/*void swap(heap_t *root, heap_t *node)
+{
+	heap_t *temp;
+
+	while (node->parent) 
+	{
+		if (node->n > node->parent)
+		{
+			temp = node->parent;
+			node->parent = node;
+			node = temp;
+		}
+		node = node->parent;
+	}
+}*/
+
+/**
+ * find_parent - Finds the most suitable parent node to mantain Max Heap..
  *
  * @root: Address to root node of Heap.
  * @node: Node to be inserted.
- *
- * Return: Pointer to the inserted node, or NULL if it fails.
  */
-heap_t *heap_insert2(heap_t *root, heap_t *node)
+void find_parent(heap_t *root, heap_t *node, heap_t **parent)
 {
-	if (root->left == NULL)
+	if (root->left && root->right)
 	{
-		root->left = node;
-		node->parent = root;
-	}
-	else if (root->right == NULL)
-	{
-		root->right = node;
-		node->parent = root;
+		find_parent(root->left, node, parent);
+		find_parent(root->right, node, parent);
 	}
 	else
 	{
-		node = heap_insert2(root->left, node);
-		if (node)
+		if (root->left == NULL || root->right == NULL)
 		{
-			return (node);
-
-		}
-
-		node = heap_insert2(root->right, node);
-		if (node)
-		{
-			return (node);
+			*parent = root;
 		}
 	}
-	return (node);
 }
-
 
 /**
  * heap_insert - Inserts a value into a Max Binary Heap.
@@ -51,6 +80,7 @@ heap_t *heap_insert2(heap_t *root, heap_t *node)
 heap_t *heap_insert(heap_t **root, int value)
 {
 	heap_t *new_node;
+	heap_t *parent = NULL;
 
 	new_node = malloc(sizeof(heap_t));
 	if (!new_node)
@@ -69,8 +99,17 @@ heap_t *heap_insert(heap_t **root, int value)
 	}
 	else
 	{
-		new_node = heap_insert2(*root, new_node);
+		find_parent(*root, new_node, &parent);
+		if (parent->left == NULL)
+		{
+			parent->left = new_node;
+		}
+		else if (parent->right == NULL)
+		{
+			parent->right = new_node;
+		}
+		new_node->parent = parent;
+		/*swap(*root, new_node);*/
 	}
-
 	return (new_node);
 }
