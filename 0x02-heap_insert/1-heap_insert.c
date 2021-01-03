@@ -1,6 +1,5 @@
 #include "binary_trees.h"
 #include <stdlib.h>
-#include <stdbool.h>
 
 /**
  * depth - Calculates the depth of the tree.
@@ -11,7 +10,7 @@
  */
 int calculate_depth(heap_t *root)
 {
-	int depth = 1;
+	int depth = 0;
 	heap_t *iterator;
 
 	iterator = root;
@@ -26,24 +25,57 @@ int calculate_depth(heap_t *root)
 /**
  * swap - If there is a Max heap violation it swaps the nodes.
  *
- * @root: Addess of root node.
- * @new_node: node to start checkin for Max heap violations.
- *
- *
+ * @node: node to start checkin for Max heap violations.
  */
-/*void swap(heap_t *root, heap_t *node)
+/*void swap(heap_t **node)
 {
-	heap_t *temp;
+	heap_t *iterator = *node;
+	heap_t *temp, *father, *grandfather;
 
-	while (node->parent) 
+	while (iterator->parent)
 	{
-		if (node->n > node->parent)
+		if (iterator->n > iterator->parent->n)
 		{
-			temp = node->parent;
-			node->parent = node;
-			node = temp;
+			grandfather = iterator->parent->parent;
+			father = iterator->parent;
+
+			temp = iterator->parent;
+			iterator->parent = iterator;
+			iterator = temp;
+			
+			iterator->parent = grandfather;
+
+			if (grandfather && grandfather->left == father)
+			{
+				grandfather->left = iterator;
+			}
+			else if (grandfather && grandfather->right == father)
+			{
+				grandfather->right = iterator;
+			}
+
+			if (father->left == iterator)
+			{
+
+				temp = iterator->left;
+				iterator->left = father;
+				father->left = temp;
+
+				temp = father->right;
+				father->right = iterator->right;
+				iterator->right = temp;
+			}
+			else if (father->right == iterator)
+			{
+				temp = iterator->right;
+				iterator->right = father;
+				father->right = temp;
+
+				temp = father->left;
+				father->left = iterator->left;
+				iterator->left = temp;
+			}
 		}
-		node = node->parent;
 	}
 }*/
 
@@ -52,20 +84,26 @@ int calculate_depth(heap_t *root)
  *
  * @root: Address to root node of Heap.
  * @node: Node to be inserted.
+ * @parent: Node most suitable to be parent.
+ * @depth: Total depth.
+ * @present_depth: Actual depth.
  */
-void find_parent(heap_t *root, heap_t *node, heap_t **parent)
+void find_parent(heap_t *root, heap_t *node, heap_t **parent, int* depth, int* present_depth)
 {
-	if (root->left && root->right)
+	(*present_depth)++;
+
+
+	if ((root->left == NULL || root->right == NULL))
 	{
-		find_parent(root->left, node, parent);
-		find_parent(root->right, node, parent);
+		*parent = root;
 	}
-	else
+	else if (root->left && root->right)
 	{
-		if (root->left == NULL || root->right == NULL)
-		{
-			*parent = root;
-		}
+		find_parent(root->left, node, parent, depth, present_depth);	
+		if (parent)
+			return;
+
+		find_parent(root->right, node, parent, depth, present_depth);
 	}
 }
 
@@ -81,6 +119,8 @@ heap_t *heap_insert(heap_t **root, int value)
 {
 	heap_t *new_node;
 	heap_t *parent = NULL;
+	int depth = 0;
+	int present_depth = 0;
 
 	new_node = malloc(sizeof(heap_t));
 	if (!new_node)
@@ -99,7 +139,10 @@ heap_t *heap_insert(heap_t **root, int value)
 	}
 	else
 	{
-		find_parent(*root, new_node, &parent);
+		depth = calculate_depth(*root);
+
+		find_parent(*root, new_node, &parent, &depth, &present_depth);
+
 		if (parent->left == NULL)
 		{
 			parent->left = new_node;
@@ -109,7 +152,7 @@ heap_t *heap_insert(heap_t **root, int value)
 			parent->right = new_node;
 		}
 		new_node->parent = parent;
-		/*swap(*root, new_node);*/
+		/*swap(&new_node);*/
 	}
 	return (new_node);
 }
