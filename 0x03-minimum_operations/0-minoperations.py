@@ -4,6 +4,15 @@ def minOperations(n):
         return 0
     
     half = int(n / 2)
-    for i in range(2, half + 2):
-        if (n % i):
-            return int(n / i) + i
+    max = 0
+
+    for i in range(2, half):
+        if (n % i == 0):
+            max = i
+            if (i > max):
+                max = i
+
+    if max != 0:
+        return int(n / max) + max
+    else:
+        return n
