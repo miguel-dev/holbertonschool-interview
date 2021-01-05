@@ -8,7 +8,6 @@ def minOperations(n):
 
     for i in range(2, half):
         if (n % i == 0):
-            max = i
             if (i > max):
                 max = i
 
