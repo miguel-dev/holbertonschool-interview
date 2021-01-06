@@ -11,7 +11,7 @@ def minOperations(n):
     numH = 1
     mem = 0
 
-    while (numH <= n):
+    while (numH < n):
         if (n % numH == 0):
             mem = numH
             numH += mem
