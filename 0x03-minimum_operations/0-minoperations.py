@@ -15,3 +15,4 @@ def minOperations(n):
         return int(n / max) + max
     else:
         return n
+
