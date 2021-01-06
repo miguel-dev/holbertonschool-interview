@@ -4,7 +4,7 @@
 
 def minOperations(n):
     '''Calculates minimal number of operations for a given number'''
-    if (n <= 1):   # l do nothing, 0 or negative nothing can be done
+    if (not isinstance(n, int) or n <= 1):
         return 0
 
     half = int(n / 2)
