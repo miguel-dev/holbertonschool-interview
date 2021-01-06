@@ -14,10 +14,8 @@ def minOperations(n):
     while (numH < n):
         if (n % numH == 0):
             mem = numH
-            numH += mem
-            numOp += 2
-        else:
-            numH = mem + numH
             numOp += 1
+        numH += mem
+        numOp += 1
 
     return numOp
