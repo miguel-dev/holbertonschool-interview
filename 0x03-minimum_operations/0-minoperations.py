@@ -4,18 +4,20 @@
 
 def minOperations(n):
     '''Calculates minimal number of operations for a given number'''
-    if (not isinstance(n, int) or n <= 1):
+    if (n <= 1):
         return 0
 
-    half = int(n / 2)
-    maxx = 1
+    numOp = 0
+    numH = 1
+    mem = 0
 
-    for i in range(2, half):
-        if (n % i == 0):
-            if (i > maxx):
-                maxx = i
+    while (numH <= n):
+        if (n % numH == 0):
+            mem = numH
+            numH += mem
+            numOp += 2
+        else:
+            numH = mem + numH
+            numOp += 1
 
-    if maxx != 1:
-        return int(n / maxx) + maxx
-    else:
-        return n
+    return numOp
