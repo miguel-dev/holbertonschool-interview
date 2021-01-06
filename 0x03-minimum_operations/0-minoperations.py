@@ -13,9 +13,9 @@ def minOperations(n):
 
     while (numH < n):
         if (n % numH == 0):
-            mem = numH
+            mem = numH  # Copy All
             numOp += 1
-        numH += mem
+        numH += mem  # Paste
         numOp += 1
 
     return numOp
