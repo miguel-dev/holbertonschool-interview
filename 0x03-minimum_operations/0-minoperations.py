@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+'''MinOperations module'''
 
 
 def minOperations(n):
+    '''Calculates minimal number of operations for a given number'''
     if (n <= 1):   # l do nothing, 0 or negative nothing can be done
         return 0
 
