@@ -1,7 +1,7 @@
 #include "sandpiles.h"
 #include <stdio.h>
 
-static void print_grid(int (*grid)[3])
+static void print_grid(int grid[3][3])
 {
     int i, j;
 
@@ -17,7 +17,7 @@ static void print_grid(int (*grid)[3])
     }
 }
 
-void copy_grid(int (*grid1)[3], int grid2[3][3])
+void copy_grid(int grid1[3][3], int grid2[3][3])
 {
 	int i, j;
 
@@ -45,69 +45,53 @@ int is_stable(int grid[3][3])
 			}
 		}
 	}
-	return stable;
+	return (stable);
 }
 
-void topple(int (*grid)[3])
+void topple(int grid[3][3])
 {
 	int future[3][3];
-	int rows, columns;/*, stable;*/
-	/*stable = 0;*/
-
-	/*while (!stable)
-	{*/
-		for (rows = 0; rows < 3; rows++)
-		{
-			for (columns = 0; columns < 3; columns++)
-			{
-				if (grid[rows][columns] <= 3)
-				{
-					future[rows][columns] = grid[rows][columns];
-				}
-			}
-		}
+	int x, y;
 	
-		for (rows = 0; rows < 3; rows++)
-		{
-			for (columns = 0; columns < 3; columns++)
-			{
-				if(grid[rows][columns] > 3)
-				{
-					future[rows][columns] += (grid[rows][columns] - 4);
+	printf("=\n");
+	print_grid(grid);
+	
+	for (x = 0; x < 3; x++)
+		for (y = 0; y < 3; y++)
+			if (grid[x][y] <= 3)
+				future[x][y] = grid[x][y];
 
-					if (rows > 0) /*up*/
-					{
-						future[rows - 1][columns] += 1;
-					}
-					if (columns < 2) /*right*/
-					{
-						future[rows][columns + 1] += 1;
-					}
-					if (rows < 2) /*down*/
-					{
-						future[rows + 1][columns] += 1;
-					}
-					if (columns > 0) /*left*/
-					{
-						future[rows][columns - 1] += 1;
-					}
-				}
+	for (x = 0; x < 3; x++)
+	{
+		for (y = 0; y < 3; y++)
+		{
+			if (grid[x][y] > 3)
+			{
+				future[x][y] += (grid[x][y] - 4);
+
+				if (x > 0) /*up*/
+					future[x - 1][y] += 1;
+
+				if (y < 2) /*right*/
+					future[x][y + 1] += 1;
+
+				if (x < 2) /*down*/
+					future[x + 1][y] += 1;
+
+				if (y > 0) /*left*/
+					future[x][y - 1] += 1;
 			}
 		}
-		copy_grid(grid, future);
+	}
+	copy_grid(grid, future);
 
-		/*stable = is_stable(grid1);*/
-
-		printf("=\n");
-		print_grid(grid);
-	/*}*/
 }
 
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
 	int rows, columns;
-	
- 	for (rows = 0; rows < 3; rows++)
+
+	for (rows = 0; rows < 3; rows++)
 	{
 		for (columns = 0; columns < 3; columns++)
 		{
@@ -115,4 +99,7 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		}
 	}
 	topple(grid1);
+
+	printf("=\n");
+	print_grid(grid1);
 }
