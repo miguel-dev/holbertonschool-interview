@@ -126,8 +126,13 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		}
 	}
 
-	printf("=\n");
-	print_grid(grid1);
+	stable = is_stable(grid1);
+
+	if (!stable)
+	{
+		printf("=\n");
+		print_grid(grid1);
+	}
 
 	while (!stable)
 	{
