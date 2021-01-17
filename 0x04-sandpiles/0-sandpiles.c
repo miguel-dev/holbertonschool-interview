@@ -1,6 +1,11 @@
 #include "sandpiles.h"
 #include <stdio.h>
 
+/**
+ * print_grid - Prints a grid.
+ * @grid: 3x3 grid to be printed.
+ *
+ */
 static void print_grid(int grid[3][3])
 {
 	int i, j;
@@ -17,6 +22,12 @@ static void print_grid(int grid[3][3])
 	}
 }
 
+/**
+ * copy_grid - Copies one grid to another.
+ * @grid1: Grid to be copied.
+ * @grid2: Grid to copy to.
+ *
+ */
 void copy_grid(int grid1[3][3], int grid2[3][3])
 {
 	int i, j;
@@ -30,6 +41,12 @@ void copy_grid(int grid1[3][3], int grid2[3][3])
 	}
 }
 
+/**
+ * is_stable - Calculates if a sandpile is stable.
+ * @grid: 3x3 grid to evaluate.
+ *
+ * Return: 1 if stable, 0 if not.
+ */
 int is_stable(int grid[3][3])
 {
 	int i, j, stable;
@@ -49,6 +66,11 @@ int is_stable(int grid[3][3])
 	return (stable);
 }
 
+/**
+ * topple - Calculates the resulting sandpile after a topple.
+ * @grid: 3x3 grid to topple
+ *
+ */
 void topple(int grid[3][3])
 {
 	int future[3][3] = {{0}};
@@ -84,6 +106,12 @@ void topple(int grid[3][3])
 	copy_grid(grid, future);
 }
 
+/**
+ * sandpiles_sum - Computes the sum of two sandpiles.
+ * @grid1: First 3x3 grid
+ * @grid2: Second 3x3 grid
+ *
+ */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
 	int rows, columns, stable;
