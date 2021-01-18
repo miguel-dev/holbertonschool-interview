@@ -1,28 +1,28 @@
 #include "lists.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * is_palindrome_r - Recursive function to evaluate if an array is palindrome.
  * @array: Array to check.
  * @left: Index to left position in the array.
  * @right: Index to right position in the array.
- * @is_pal: Indicated whether the array could be a palindrome or not.
  *
+ * Return: 1 if it's palindrome and 0 if it's not.
  */
-void is_palindrome_r(int *array, int left, int right, int *is_pal)
+int is_palindrome_rec(int *array, int left, int right)
 {
-	if (left < right && *is_pal == 1)
+	if (left >= right)
 	{
-		if (array[left] != array[right])
-		{
-			is_pal = 0;
-		}
-		else
-		{
-			left++;
-			right--;
-			is_palindrome_r(array, left, right, is_pal);
-		}
+		return (1);
+	}
+	else if (array[left] == array[right])
+	{
+		return is_palindrome_rec(array, left + 1, right - 1);
+	}
+	else
+	{
+		return (0);
 	}
 }
 
@@ -38,7 +38,6 @@ int is_palindrome(listint_t **head)
 	int *list_arr = NULL;
 	int size = 0;
 	int i = 0;
-	int is_pal = 1;
 
 	if (*head == NULL)
 		return (1);
@@ -49,6 +48,7 @@ int is_palindrome(listint_t **head)
 		iterator = iterator->next;
 		size++;
 	}
+	size += 1;
 
 	list_arr = (int *)malloc(sizeof(int) * size);
 
@@ -59,6 +59,7 @@ int is_palindrome(listint_t **head)
 		iterator = iterator->next;
 		i++;
 	}
-	is_palindrome_r(list_arr, 0, size - 1, &is_pal);
-	return (is_pal);
+	list_arr[i] = iterator->n;
+
+	return is_palindrome_rec(list_arr, 0, size - 1);
 }
