@@ -44,10 +44,12 @@ int is_palindrome(listint_t **head)
 	{
 		if (list_arr[left] != list_arr[right])
 		{
+			free(list_arr);
 			return (0);
 		}
 		left++;
 		right--;
 	}
+	free(list_arr);
 	return (1);
 }
