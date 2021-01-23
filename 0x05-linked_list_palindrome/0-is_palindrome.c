@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 /**
  * is_palindrome - Checks if a list is palindrome.
  * @head: Address of head pointer of list.
@@ -11,8 +12,8 @@
 int is_palindrome(listint_t **head)
 {
 	listint_t *iterator = NULL;
-	int *list_arr = NULL;
-	int size, i, left, right;
+	int list_arr[99] = {0};
+	int size, left, right;
 
 	if (*head == NULL)
 		return (1);
@@ -21,22 +22,12 @@ int is_palindrome(listint_t **head)
 	iterator = *head;
 	while (iterator->next)
 	{
+		list_arr[size] = iterator->n;
 		iterator = iterator->next;
 		size++;
 	}
+	list_arr[size] = iterator->n;
 	size += 1;
-
-	list_arr = (int *)malloc(sizeof(int) * size);
-
-	i = 0;
-	iterator = *head;
-	while (iterator->next)
-	{
-		list_arr[i] = iterator->n;
-		iterator = iterator->next;
-		i++;
-	}
-	list_arr[i] = iterator->n;
 
 	left = 0;
 	right = size - 1;
@@ -44,12 +35,10 @@ int is_palindrome(listint_t **head)
 	{
 		if (list_arr[left] != list_arr[right])
 		{
-			free(list_arr);
 			return (0);
 		}
 		left++;
 		right--;
 	}
-	free(list_arr);
 	return (1);
 }
