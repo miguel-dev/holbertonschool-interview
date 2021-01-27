@@ -32,4 +32,4 @@ except KeyboardInterrupt:
     for c in sorted(status_codes):
         print("{:s}: {:d}".format(c, status_codes[c]))
 
-    traceback.print_exc()
+    print(traceback.format_exc())
