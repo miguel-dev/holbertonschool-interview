@@ -28,12 +28,14 @@ try:
         num += 1
 
 except KeyboardInterrupt:
+    exc_info = sys.exc_info()
     print("File size: {:d}".format(total_size))
 
     for c in sorted(status_codes):
         print("{:s}: {:d}".format(c, status_codes[c]))
 
-    traceback.print_exc()
+    traceback.print_exception(*exc_info)
+    del exc_info
 
 finally:
     print("File size: {:d}".format(total_size))
