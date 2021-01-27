@@ -35,7 +35,7 @@ except KeyboardInterrupt:
 
     traceback.format_exc()
 
-finally:
+if num < 0:
     print("File size: {:d}".format(total_size))
 
     for c in sorted(status_codes):
