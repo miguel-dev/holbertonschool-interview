@@ -8,7 +8,7 @@ num = 0
 try:
     for line in sys.stdin:
         parsed = line.split()
-        total_size += int(parsed[-1]);
+        total_size += int(parsed[-1])
         code = parsed[-2]
 
         if code in status_codes:
