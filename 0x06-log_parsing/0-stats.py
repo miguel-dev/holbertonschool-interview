@@ -33,7 +33,7 @@ except KeyboardInterrupt:
     for c in sorted(status_codes):
         print("{:s}: {:d}".format(c, status_codes[c]))
 
-    traceback.format_exc()
+    raise
 
 if num < 0:
     print("File size: {:d}".format(total_size))
