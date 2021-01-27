@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Reads stdin line by line and computes metrics"""
 import sys
+import traceback
 
 total_size = 0
 status_codes = {}
@@ -30,3 +31,5 @@ except KeyboardInterrupt:
 
     for c in sorted(status_codes):
         print("{:s}: {:d}".format(c, status_codes[c]))
+
+    traceback.print_exc()
