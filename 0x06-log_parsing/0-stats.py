@@ -13,7 +13,7 @@ if __name__ == "__main__":
         for line in sys.stdin:
             parsed = line.split()
             total_size += int(parsed[-1])
-            code = parsed[-2]
+            code = int(parsed[-2])
 
             if code in status_codes:
                 status_codes[code] += 1
@@ -26,13 +26,13 @@ if __name__ == "__main__":
                 print("File size: {:d}".format(total_size))
 
                 for c in sorted(status_codes):
-                    print("{:s}: {:d}".format(c, status_codes[c]))
+                    print("{:d}: {:d}".format(c, status_codes[c]))
 
     except KeyboardInterrupt:
         print("File size: {:d}".format(total_size))
 
         for c in sorted(status_codes):
-            print("{:s}: {:d}".format(c, status_codes[c]))
+            print("{:d}: {:d}".format(c, status_codes[c]))
 
         raise
 
@@ -41,4 +41,4 @@ if __name__ == "__main__":
         print("File size: {:d}".format(total_size))
 
         for c in sorted(status_codes):
-            print("{:s}: {:d}".format(c, status_codes[c]))
+            print("{:d}: {:d}".format(c, status_codes[c]))
