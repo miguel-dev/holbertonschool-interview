@@ -10,6 +10,13 @@ if __name__ == "__main__":
     valid_codes = {"200", "301", "400", "401", "403", "404", "405", "500"}
     num = 0
 
+    def printMetrics():
+
+        print("File size: {:d}".format(total_size))
+
+        for c in sorted(status_codes):
+            print("{:s}: {:d}".format(c, status_codes[c]))
+
     try:
         for line in sys.stdin:
             parsed = line.split()
@@ -35,21 +42,9 @@ if __name__ == "__main__":
                 status_codes[code] = 1
 
             if (num % 10 == 0):
-                print("File size: {:d}".format(total_size))
-
-                for c in sorted(status_codes):
-                    print("{:s}: {:d}".format(c, status_codes[c]))
+                printMetrics()
+        printMetrics()
 
     except KeyboardInterrupt:
-        print("File size: {:d}".format(total_size))
-
-        for c in sorted(status_codes):
-            print("{:s}: {:d}".format(c, status_codes[c]))
-
+        printMetrics()
         raise
-
-    finally:
-        print("File size: {:d}".format(total_size))
-
-        for c in sorted(status_codes):
-            print("{:s}: {:d}".format(c, status_codes[c]))
