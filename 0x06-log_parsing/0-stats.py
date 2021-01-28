@@ -7,6 +7,7 @@ import traceback
 if __name__ == "__main__":
     total_size = 0
     status_codes = {}
+    valid_codes = {200, 301, 400, 401, 403, 404, 405, 500}
     num = 0
 
     try:
@@ -14,6 +15,9 @@ if __name__ == "__main__":
             parsed = line.split()
             total_size += int(parsed[-1])
             code = int(parsed[-2])
+
+            if code not in valid_codes:
+                continue
 
             if code in status_codes:
                 status_codes[code] += 1
