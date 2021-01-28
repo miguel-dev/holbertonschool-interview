@@ -19,13 +19,14 @@ try:
         else:
             status_codes[code] = 1
 
+        num += 1
+
         if (num % 10 == 0):
             print("File size: {:d}".format(total_size))
 
             for c in sorted(status_codes):
                 print("{:s}: {:d}".format(c, status_codes[c]))
 
-        num += 1
 
 except KeyboardInterrupt:
     print("File size: {:d}".format(total_size))
