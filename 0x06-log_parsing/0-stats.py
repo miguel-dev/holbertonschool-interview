@@ -6,8 +6,14 @@ import traceback
 
 if __name__ == "__main__":
     total_size = 0
-    status_codes = {}
-    valid_codes = {"200", "301", "400", "401", "403", "404", "405", "500"}
+    status_codes = {"200": 0,
+                    "301": 0,
+                    "400": 0,
+                    "401": 0,
+                    "403": 0,
+                    "404": 0,
+                    "405": 0,
+                    "500": 0}
     num = 0
 
     def printMetrics():
@@ -15,34 +21,24 @@ if __name__ == "__main__":
         print("File size: {:d}".format(total_size))
 
         for c in sorted(status_codes):
-            print("{:s}: {:d}".format(c, status_codes[c]))
+            if status_codes[c]:
+                print("{:s}: {:d}".format(c, status_codes[c]))
 
     try:
         for line in sys.stdin:
             parsed = line.split()
-
-            if len(parsed) != 9:
-                continue
-
-            try:
-                total_size += int(parsed[-1])
-            except ValueError:
-                continue
-
             code = parsed[-2]
 
-            if code not in valid_codes:
-                continue
+            if len(parsed) == 9:
+                if code in status_codes:
+                    status_codes[code] += 1
 
-            num += 1
+                total_size += int(parsed[-1])
 
-            if code in status_codes:
-                status_codes[code] += 1
-            else:
-                status_codes[code] = 1
+                num += 1
 
-            if (num % 10 == 0):
-                printMetrics()
+                if (num % 10 == 0):
+                    printMetrics()
         printMetrics()
 
     except KeyboardInterrupt:
