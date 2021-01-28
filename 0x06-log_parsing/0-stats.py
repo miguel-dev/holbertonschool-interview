@@ -17,7 +17,7 @@ if __name__ == "__main__":
             if len(parsed) != 9:
                 continue
 
-            try: 
+            try:
                 total_size += int(parsed[-1])
                 code = int(parsed[-2])
             except:
@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
             if code not in valid_codes:
                 continue
-            
+
             num += 1
 
             if code in status_codes:
@@ -38,7 +38,6 @@ if __name__ == "__main__":
 
                 for c in sorted(status_codes):
                     print("{:d}: {:d}".format(c, status_codes[c]))
-            
 
     except KeyboardInterrupt:
         print("File size: {:d}".format(total_size))
@@ -49,7 +48,6 @@ if __name__ == "__main__":
         raise
 
     finally:
-
         print("File size: {:d}".format(total_size))
 
         for c in sorted(status_codes):
