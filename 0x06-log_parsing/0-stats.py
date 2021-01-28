@@ -6,7 +6,14 @@ import traceback
 
 if __name__ == "__main__":
     total_size = 0
-    status_codes = {}
+    status_codes = {"200": 0,
+                    "301": 0,
+                    "400": 0,
+                    "401": 0,
+                    "403": 0,
+                    "404": 0,
+                    "405": 0,
+                    "500": 0}
     num = 0
 
     def printMetrics():
@@ -25,8 +32,6 @@ if __name__ == "__main__":
                 code = parsed[-2]
                 if code in status_codes:
                     status_codes[code] += 1
-                else:
-                    status_codes[code] = 1
 
                 total_size += int(parsed[-1])
 
