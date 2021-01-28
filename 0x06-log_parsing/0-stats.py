@@ -14,8 +14,6 @@ if __name__ == "__main__":
         for line in sys.stdin:
             parsed = line.split()
 
-            num += 1
-
             if len(parsed) != 9:
                 continue
 
@@ -27,6 +25,8 @@ if __name__ == "__main__":
 
             if code not in valid_codes:
                 continue
+            
+            num += 1
 
             if code in status_codes:
                 status_codes[code] += 1
