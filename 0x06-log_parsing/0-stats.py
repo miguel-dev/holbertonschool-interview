@@ -4,40 +4,41 @@
 import sys
 import traceback
 
-total_size = 0
-status_codes = {}
-num = 0
+if __name__ == "__main__":
+    total_size = 0
+    status_codes = {}
+    num = 0
 
-try:
-    for line in sys.stdin:
-        parsed = line.split()
-        total_size += int(parsed[-1])
-        code = parsed[-2]
+    try:
+        for line in sys.stdin:
+            parsed = line.split()
+            total_size += int(parsed[-1])
+            code = parsed[-2]
 
-        if code in status_codes:
-            status_codes[code] += 1
-        else:
-            status_codes[code] = 1
+            if code in status_codes:
+                status_codes[code] += 1
+            else:
+                status_codes[code] = 1
 
-        num += 1
+            num += 1
 
-        if (num % 10 == 0):
-            print("File size: {:d}".format(total_size))
+            if (num % 10 == 0):
+                print("File size: {:d}".format(total_size))
 
-            for c in sorted(status_codes):
-                print("{:s}: {:d}".format(c, status_codes[c]))
+                for c in sorted(status_codes):
+                    print("{:s}: {:d}".format(c, status_codes[c]))
 
+    except KeyboardInterrupt:
+        print("File size: {:d}".format(total_size))
 
-except KeyboardInterrupt:
-    print("File size: {:d}".format(total_size))
+        for c in sorted(status_codes):
+            print("{:s}: {:d}".format(c, status_codes[c]))
 
-    for c in sorted(status_codes):
-        print("{:s}: {:d}".format(c, status_codes[c]))
+        raise
 
-    raise
+    finally:
 
-if num < 0:
-    print("File size: {:d}".format(total_size))
+        print("File size: {:d}".format(total_size))
 
-    for c in sorted(status_codes):
-        print("{:s}: {:d}".format(c, status_codes[c]))
+        for c in sorted(status_codes):
+            print("{:s}: {:d}".format(c, status_codes[c]))
