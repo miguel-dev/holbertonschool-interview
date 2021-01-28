@@ -13,6 +13,10 @@ if __name__ == "__main__":
     try:
         for line in sys.stdin:
             parsed = line.split()
+
+            if len(parsed) != 9:
+                continue
+
             total_size += int(parsed[-1])
             code = int(parsed[-2])
 
