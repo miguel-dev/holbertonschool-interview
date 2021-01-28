@@ -20,7 +20,7 @@ if __name__ == "__main__":
             try:
                 total_size += int(parsed[-1])
                 code = int(parsed[-2])
-            except:
+            except ValueError:
                 continue
 
             if code not in valid_codes:
