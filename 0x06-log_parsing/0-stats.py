@@ -28,7 +28,7 @@ if __name__ == "__main__":
         for line in sys.stdin:
             parsed = line.split()
 
-            if len(parsed) >= 9:
+            if len(parsed) >= 2:
                 code = parsed[-2]
                 if code in status_codes:
                     status_codes[code] += 1
