@@ -19,13 +19,14 @@ if __name__ == "__main__":
 
             try:
                 total_size += int(parsed[-1])
-                code = parsed[-2]
             except ValueError:
                 continue
 
+            code = parsed[-2]
+
             if code not in valid_codes:
                 continue
-            
+
             num += 1
 
             if code in status_codes:
