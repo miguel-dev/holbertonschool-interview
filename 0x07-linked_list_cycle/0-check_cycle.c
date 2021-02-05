@@ -21,9 +21,7 @@ int check_cycle(listint_t *list)
 		tortoise = tortoise->next;
 
 		if (hare->next == NULL)
-		{
 			break;
-		}
 
 		hare = hare->next->next;
 
