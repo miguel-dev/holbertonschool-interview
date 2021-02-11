@@ -9,18 +9,18 @@
  */
 int is_palindrome(unsigned long n)
 {
-	int reversed = 0;
 	int number = n;
+	int reversed = 0;
 	int remainder = 0;
 
-	while (number)   /*Calculates the reversed number.*/
+	while (n)   /*Calculates the reversed number.*/
 	{
-		remainder = number % 10;
+		remainder = n % 10;
 		reversed = reversed * 10 + remainder;
-		number /= 10;
+		n /= 10;
 	}
 
-	if (n == reversed)
+	if (number == reversed)
 		return (1);
 	else
 		return (0);
