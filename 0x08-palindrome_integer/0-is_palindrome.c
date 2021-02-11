@@ -1,5 +1,24 @@
 #include "palindrome.h"
 
+/**
+ * reversed - Calculates the reverse number
+ * @n: integer
+ *
+ * Return: Reversed number.
+ */
+int reversed(unsigned long n)
+{
+	unsigned long r = 0;
+	int remainder;
+
+	while (n)   /*Calculates the reversed number.*/
+	{
+		remainder = n % 10;
+		r = r * 10 + remainder;
+		n /= 10;
+	}
+	return (r);
+}
 
 /**
  * is_palindrome - Checks if a number is palindrome.
@@ -9,18 +28,9 @@
  */
 int is_palindrome(unsigned long n)
 {
-	int number = n;
-	int reversed = 0;
-	int remainder = 0;
+	unsigned long r = reversed(n);
 
-	while (n)   /*Calculates the reversed number.*/
-	{
-		remainder = n % 10;
-		reversed = reversed * 10 + remainder;
-		n /= 10;
-	}
-
-	if (number == reversed)
+	if (n == r)
 		return (1);
 	else
 		return (0);
