@@ -6,7 +6,7 @@
  *
  * Return: Reversed number.
  */
-int reversed(unsigned long n)
+unsigned long reversed(unsigned long n)
 {
 	unsigned long r = 0;
 	unsigned long remainder;
