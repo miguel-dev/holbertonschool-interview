@@ -10,17 +10,17 @@
 int is_palindrome(unsigned long n)
 {
 	int reversed = 0;
-	int original = n;
+	int number = n;
 	int remainder = 0;
 
-	while (n)   /*Calculates the reversed. It Will iterate for the length.*/
+	while (number)   /*Calculates the reversed number.*/
 	{
-		remainder = n % 10;
+		remainder = number % 10;
 		reversed = reversed * 10 + remainder;
-		n /= 10;
+		number /= 10;
 	}
 
-	if (original == reversed)
+	if (n == reversed)
 		return (1);
 	else
 		return (0);
