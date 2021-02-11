@@ -9,7 +9,7 @@
 int reversed(unsigned long n)
 {
 	unsigned long r = 0;
-	int remainder;
+	unsigned long remainder;
 
 	while (n)   /*Calculates the reversed number.*/
 	{
