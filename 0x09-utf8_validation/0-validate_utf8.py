@@ -9,7 +9,7 @@ def validUTF8(data):
         if i > 255:
             return False
         else:
-            binary = str(bin(i))
+            binary = str('{0: 08b}'.format(i))
             binary = binary[-8:]
 
             if (char_left > 0):
@@ -25,4 +25,8 @@ def validUTF8(data):
                 char_left = 2
             elif binary.find("11110") == 0:
                 char_left = 3
+            elif binary.find("b"):
+                continue
+            else:
+                return False
     return True
