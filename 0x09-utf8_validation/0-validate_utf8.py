@@ -6,7 +6,7 @@
 def validUTF8(data):
     for i in data:
         char_left = 0
-        if i > 128:
+        if i > 244 or i == 192 or i == 193:
             return False
         else:
             binary = str('{0: 08b}'.format(i))
