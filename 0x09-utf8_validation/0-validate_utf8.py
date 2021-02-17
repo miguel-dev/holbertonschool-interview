@@ -10,7 +10,7 @@ def validUTF8(data):
             return False
         else:
             binary = str('{0: 08b}'.format(i))
-            binary = binary[-8:]
+            binary = binary[1:]
 
             if (char_left > 0):
                 if (binary[0] == 1 and binary[1] == 0):
@@ -19,14 +19,13 @@ def validUTF8(data):
                 else:
                     return False
 
-            if binary.find("110") == 0:
-                char_left = 1
-            elif binary.find("1110") == 0:
-                char_left = 2
-            elif binary.find("11110") == 0:
-                char_left = 3
-            elif binary.find("b"):
-                continue
-            else:
-                return False
+            if (len(binary) == 8):
+                if binary.find("110") == 0:
+                    char_left = 1
+                elif binary.find("1110") == 0:
+                    char_left = 2
+                elif binary.find("11110") == 0:
+                    char_left = 3
+                else:
+                    return False
     return True
