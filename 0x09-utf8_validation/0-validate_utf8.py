@@ -8,7 +8,7 @@ def validUTF8(data):
     byte_left = 0
 
     for i in data:
-        binary = str('{0: 08b}'.format(i))
+        binary = str('{0: 08b}'.format(i & 255))
         binary = binary[1:]
 
         if (byte_left > 0):
