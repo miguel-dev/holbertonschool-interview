@@ -24,7 +24,7 @@ def validUTF8(data):
                 byte_left = 2
             elif binary[:5] == "11110":
                 byte_left = 3
-            elif binary[:2] == "01":
+            elif binary[0] == "0":
                 pass
             elif binary == "00000000":
                 pass
