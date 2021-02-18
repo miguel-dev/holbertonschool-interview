@@ -14,7 +14,7 @@ def validUTF8(data):
             binary = binary[1:]
 
             if (byte_left > 0):
-                if (len(binary) == 8 and binary[0] == 1 and binary[1] == 0):
+                if len(binary) == 8 and binary[0] == "1" and binary[1] == "0":
                     byte_left -= 1
                     continue
                 else:
