@@ -7,7 +7,13 @@ def validUTF8(data):
     """Checks for valid UTF-8 encoding"""
     byte_left = 0
 
+    if not isinstance(data, list):
+        return False
+
     for i in data:
+        if not isinstance(i, int):
+            return False
+
         binary = str('{0:08b}'.format(i & 255))
 
         if (byte_left > 0):
