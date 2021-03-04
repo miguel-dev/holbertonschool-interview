@@ -7,15 +7,20 @@
  *
  * @y: Coordinate for y axis.
  * @x: Coordinate for x axis.
+ * @size: Size of Sierpinski Carpet.
  *
  * Return: 1 if empty, 0 otherwise.
  */
-int is_empty(int y, int x)
+int is_empty(int y, int x, int size)
 {
-	if ((y % 3 == 1 || y / 3 == 1) && (x % 3 == 1 || x / 3 == 1))
-		return (1);
-	else
-		return (0);
+	int d;
+
+	for (d = 1; d < size; d *= 3)
+	{
+		if (((y % (3 * d)) / d == 1) && (((x % (3 * d)) / d == 1)))
+			return (1);
+	}
+	return (0);
 }
 
 /**
@@ -31,6 +36,10 @@ void menger(int level)
 	{
 		return;
 	}
+	else if (level == 0)
+	{
+		printf("#\n");
+	}
 	else
 	{
 		size = pow(3, level);
@@ -39,12 +48,14 @@ void menger(int level)
 		{
 			for (x = 0; x < size; x++)
 			{
-				if (is_empty(y, x))
+				if (is_empty(y, x, size))
 				{
 					printf(" ");
 				}
 				else
+				{
 					printf("#");
+				}
 			}
 			printf("\n");
 		}
