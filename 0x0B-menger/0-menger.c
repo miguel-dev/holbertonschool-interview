@@ -24,6 +24,26 @@ int is_empty(int y, int x, int size)
 }
 
 /**
+ * print - Prints a # or space of a given pair of coordinates.
+ *
+ * @y: Coordinate for y axis.
+ * @x: Coordinate for x axis.
+ * @size: Size of Sierpinsky Carpet.
+ */
+void print(int y, int x, int size)
+{
+
+	if (is_empty(y, x, size))
+	{
+		printf(" ");
+	}
+	else
+	{
+		printf("#");
+	}
+}
+
+/**
  * menger - Prints a 2d dimensional menger sponge.
  *
  * @level: Level.
@@ -48,14 +68,7 @@ void menger(int level)
 		{
 			for (x = 0; x < size; x++)
 			{
-				if (is_empty(y, x, size))
-				{
-					printf(" ");
-				}
-				else
-				{
-					printf("#");
-				}
+				print(y, x, size);
 			}
 			printf("\n");
 		}
