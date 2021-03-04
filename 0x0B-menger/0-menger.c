@@ -7,6 +7,8 @@
  *
  * @y: Coordinate for y axis.
  * @x: Coordinate for x axis.
+ * @s: Size of space to evaluate.
+ * @level: Level of depth of Sierpinski carpet.
  *
  * Return: 1 if empty, 0 otherwise.
  */
@@ -39,7 +41,7 @@ void menger(int level)
 		{
 			for (x = 0; x < size; x++)
 			{
-				for (s = size/3; s; s/= 3)
+				for (s = size / 3; s; s /= 3)
 				{
 					if (is_empty(y, x, s, level))
 					{
