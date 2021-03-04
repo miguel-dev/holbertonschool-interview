@@ -7,14 +7,12 @@
  *
  * @y: Coordinate for y axis.
  * @x: Coordinate for x axis.
- * @s: Size of space to evaluate.
- * @level: Level of depth of Sierpinski carpet.
  *
  * Return: 1 if empty, 0 otherwise.
  */
-int is_empty(int y, int x, int s, int level)
+int is_empty(int y, int x)
 {
-	if ((y % (s * level) / s) == 1 && (x % (s * level)) / s == 1)
+	if ((y % 3 == 1 || y / 3 == 1) && (x % 3 == 1 || x / 3 == 1))
 		return (1);
 	else
 		return (0);
@@ -27,7 +25,7 @@ int is_empty(int y, int x, int s, int level)
  */
 void menger(int level)
 {
-	int x, y, s, size;
+	int x, y, size;
 
 	if (level < 0)
 	{
@@ -41,15 +39,10 @@ void menger(int level)
 		{
 			for (x = 0; x < size; x++)
 			{
-				for (s = size / 3; s; s /= 3)
+				if (is_empty(y, x))
 				{
-					if (is_empty(y, x, s, level))
-					{
-						break;
-					}
-				}
-				if (s)
 					printf(" ");
+				}
 				else
 					printf("#");
 			}
